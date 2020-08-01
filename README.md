@@ -1,5 +1,5 @@
 # raspberryPi
-tinkering with teh raspberry pi
+tinkering with the raspberry pi
 
 
 quick notes for auto phone home on a Pi

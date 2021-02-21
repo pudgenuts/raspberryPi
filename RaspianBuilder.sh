@@ -9,7 +9,7 @@ BOOT=$2"1"
 /usr/bin/mount $ROOT /mnt
 /usr/bin/mount $BOOT /mnt/boot 
 
-/usr/bin/touch ssh /mnt/boot
+/usr/bin/touch /mnt/boot/ssh 
 /usr/bin/sync
 
 /usr/bin/umount /mnt/boot

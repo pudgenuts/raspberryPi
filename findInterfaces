@@ -1,0 +1,15 @@
+INTERFACES=`ifconfig | egrep "^[a-z]" | grep -v lo | cut -d: -f1 |tr '\n' ' '`
+DEFAULTGW=`netstat -rn  | grep "^0.0.0.0" | cut -c16-30| sed -e 's/ //g' `
+echo "GW: $DEFAULTGW"
+
+for INT in $INTERFACES; 
+# for INT in `ifconfig | egrep "^[a-z]" | grep -v lo | cut -d: -f1 |tr '\n' ' '`
+        do
+                UP=`ifconfig $INT|grep "inet "|grep -c inet `
+                IP=`ifconfig $INT|grep "inet "| sed -e's/^[\t ]*//g'|cut -d: -f2-|cut -d" " -f2`
+                NETMASK=`ifconfig eth0 |grep "inet "| sed -e's/^[\t ]*//g'|cut -d: -f2-|cut -d" " -f5`
+                if [ $UP -gt 0  ]; then 
+                        echo "$INT: $IP / $NETMASK"; 
+                        python3 lcd_ip.py --line1="gw:$DEFAULTGW" --line2="$IP"
+                fi 
+        done 
